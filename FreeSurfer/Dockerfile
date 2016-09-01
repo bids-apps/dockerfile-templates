@@ -1,4 +1,4 @@
-FROM bids/validator
+FROM bids/base_validator
 
 # Download FreeSurfer
 RUN apt-get -y update \
@@ -17,8 +17,8 @@ RUN apt-get -y update \
     --exclude='freesurfer/average/mult-comp-cor' \
     --exclude='freesurfer/lib/cuda' \
     --exclude='freesurfer/lib/qt' && \
-		apt-get remove -y wget && \
-		apt-get install -y tcsh bc tar libgomp1 perl-modules curl  && \
+    apt-get remove -y wget && \
+    apt-get install -y tcsh bc tar libgomp1 perl-modules curl  && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN /bin/bash -c 'touch /opt/freesurfer/.license'
