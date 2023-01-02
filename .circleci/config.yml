@@ -17,7 +17,7 @@ jobs:
           if [[ -e ~/docker/spm.tar ]]; then
             docker load -i ~/docker/spm.tar;
           fi
-          docker build -t bids/spm:latest spm/Dockerfile
+          docker build -t bids/spm:latest ./spm/Dockerfile
           docker save "bids/spm:latest" > ~/docker/spm.tar
     - save_cache:
         key: spm_cache
@@ -40,7 +40,7 @@ jobs:
           if [[ -e ~/docker/ants.tar ]]; then
             docker load -i ~/docker/ants.tar;
           fi
-          docker build -t bids/ants:latest ants/Dockerfile
+          docker build -t bids/ants:latest ./ants/Dockerfile
           docker save "bids/ants:latest" > ~/docker/ants.tar
     - save_cache:
         key: ants_cache
@@ -63,7 +63,7 @@ jobs:
           if [[ -e ~/docker/freesurfer.tar ]]; then
             docker load -i ~/docker/freesurfer.tar;
           fi
-          docker build -t bids/freesurfer:latest freesurfer/Dockerfile
+          docker build -t bids/freesurfer:latest ./freesurfer/Dockerfile
           docker save "bids/freesurfer:latest" > ~/docker/freesurfer.tar
     - save_cache:
         key: freesurfer_cache
@@ -86,7 +86,7 @@ jobs:
           if [[ -e ~/docker/afni.tar ]]; then
             docker load -i ~/docker/afni.tar;
           fi
-          docker build -t bids/afni:latest afni/Dockerfile
+          docker build -t bids/afni:latest ./afni/Dockerfile
           docker save "bids/afni:latest" > ~/docker/afni.tar
     - save_cache:
         key: afni_cache
