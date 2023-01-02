@@ -1,0 +1,70 @@
+---
+version: 2.1
+jobs:
+  build:
+    machine:
+      # https://circleci.com/developer/machine/image/ubuntu-2204
+      image: ubuntu-2204:2022.10.2
+
+    steps:
+    - checkout
+
+    - restore_cache:
+        keys:
+        - my_cache
+
+    - run:
+        name: build spm
+        command: |
+          if [[ -e ~/docker/spm.tar ]]; then
+            docker load -i ~/docker/spm.tar;
+          fi
+          docker build -t bids/SPM:latest spm/Dockerfile
+          mkdir -p ~/docker
+          docker save "bids/spm:latest" > ~/docker/spm.tar
+
+    - run:
+        name: build ants
+        command: |
+          if [[ -e ~/docker/ants.tar ]]; then
+            docker load -i ~/docker/ants.tar;
+          fi
+          docker build -t bids/ants:latest ants/Dockerfile
+          mkdir -p ~/docker
+          docker save "bids/ants:latest" > ~/docker/ants.tar
+
+    - run:
+        name: build freesurfer
+        command: |
+          if [[ -e ~/docker/freesurfer.tar ]]; then
+            docker load -i ~/docker/freesurfer.tar;
+          fi
+          docker build -t bids/freesurfer:latest freesurfer/Dockerfile
+          mkdir -p ~/docker
+          docker save "bids/freesurfer:latest" > ~/docker/freesurfer.tar
+
+    - run:
+        name: build afni
+        command: |
+          if [[ -e ~/docker/afni.tar ]]; then
+            docker load -i ~/docker/afni.tar;
+          fi
+          docker build -t bids/afni:latest afni/Dockerfile
+          mkdir -p ~/docker
+          docker save "bids/afni:latest" > ~/docker/afni.tar
+
+    - save_cache:
+        key: my_cache
+        paths:
+        - ~/docker
+
+workflows:
+  build_deploy:
+    jobs:
+    - build:
+        filters:
+          branches:
+            only: master
+
+
+# VS Code Extension Version: 1.5.1
