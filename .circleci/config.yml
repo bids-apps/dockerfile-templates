@@ -19,7 +19,7 @@ jobs:
           if [[ -e ~/docker/spm.tar ]]; then
             docker load -i ~/docker/spm.tar;
           fi
-          docker build -t bids/SPM:latest spm/Dockerfile
+          docker build -t bids/spm:latest spm/Dockerfile
           mkdir -p ~/docker
           docker save "bids/spm:latest" > ~/docker/spm.tar
 
