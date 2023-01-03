@@ -8,13 +8,16 @@ freesurfer/Dockerfile:
 			--freesurfer method=binaries version=7.3.1 \
 		> freesurfer/Dockerfile
 
-afni/Dockerfile_tmp:
+afni/Dockerfile:
 	docker run --rm -it kaczmarj/neurodocker:0.9.1 \
 		generate docker \
-			--base-image bids/base_validator \
+			--base-image afni/afni_dev_base:AFNI_22.2.12 \
 			--pkg-manager apt \
-			--afni method=binaries version=latest \
-		> afni/Dockerfile_tmp
+			--install "ca-certificates curl apt-utils" \
+			--run "curl -sL https://deb.nodesource.com/setup_18.x | bash -" \
+			--install "nodejs" \
+			--run "node --version && npm --version && npm install -g bids-validator@1.9.9" \
+		> afni/Dockerfile
 
 ants/Dockerfile:
 	docker run --rm -it kaczmarj/neurodocker:0.9.1 \
