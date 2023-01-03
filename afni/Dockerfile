@@ -40,7 +40,6 @@ RUN apt-get update -qq \
     && apt-get update -qq \
     && apt-get install --yes --quiet --fix-missing \
     && rm -rf /var/lib/apt/lists/* \
-    &&  \
     && gsl_path="$(find / -name 'libgsl.so.??' || printf '')" \
     && if [ -n "$gsl_path" ]; then \
          ln -sfv "$gsl_path" "$(dirname $gsl_path)/libgsl.so.0"; \
