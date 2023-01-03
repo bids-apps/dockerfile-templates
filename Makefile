@@ -11,9 +11,12 @@ freesurfer/Dockerfile:
 afni/Dockerfile:
 	docker run --rm -it kaczmarj/neurodocker:0.9.1 \
 		generate docker \
+			--base-image debian:buster-slim \
 			--pkg-manager apt \
-			--base-image bids/base_validator \
 			--afni method=binaries version=latest \
+			--run "curl -sL https://deb.nodesource.com/setup_18.x | bash -" \
+			--install "nodejs" \
+			--run "node --version && npm --version && npm install -g bids-validator@1.9.9" \
 		> afni/Dockerfile
 
 ants/Dockerfile:
