@@ -12,7 +12,7 @@ jobs:
         type: string
 
     steps:
-    
+
     - checkout
 
     - restore_cache:
@@ -58,7 +58,7 @@ workflows:
     - build :
         matrix:
           parameters:
-            software: ['spm', 'afni', 'freesurfer', 'ants']    
+            software: ['spm', 'afni', 'freesurfer', 'ants' , 'spm_octave']    
 
 
 # VS Code Extension Version: 1.5.1
