@@ -55,6 +55,10 @@ workflows:
   build_deploy:
     jobs:
     - build:
+        context:
+        - dockerhub
         matrix:
           parameters:
             software: [spm, afni, freesurfer, ants, spm_octave]
+
+# VS Code Extension Version: 1.5.1
