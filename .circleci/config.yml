@@ -31,8 +31,8 @@ jobs:
     - run:
         name: push << parameters.software >> to dockerhub
         command: |
-          if [[ -n "$DOCKER_PASS" ]]; then
-            echo "${DOCKER_PASS}" | docker login -u ${DOCKER_USER} --password-stdin
+          if [[ -n "$DOCKER_TOKEN" ]]; then
+            echo "${DOCKER_TOKEN}" | docker login -u ${DOCKER_USER} --password-stdin
             echo "Pushing to DockerHub bids/base_<< parameters.software >>:unstable"
             docker tag bids/base_<< parameters.software >> bids/base_<< parameters.software >>:unstable
             docker push bids/base_<< parameters.software >>:unstable
