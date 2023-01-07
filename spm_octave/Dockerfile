@@ -31,4 +31,3 @@ RUN mkdir /opt/spm${SPM_VERSION} && \
     make -C /opt/spm${SPM_VERSION}/src PLATFORM=octave install && \
     ln -s /opt/spm${SPM_VERSION}/bin/spm${SPM_VERSION}-octave /usr/local/bin/spm${SPM_VERSION} & \
     octave --no-gui --eval "addpath('/opt/spm12/'); savepath ();"
-
